@@ -3,40 +3,47 @@ import { PRACTICE } from "./practice.config";
 export type CampaignOverride = {
   key: string;
 
-  // Optional overrides
   phoneDisplay?: string;
   phoneTel?: string;
 
   heroHeadline?: string;
-  heroSubheadline?: string;
+  heroHeadlineLine2?: string;
+  heroSubheadline?: string; // used as the “Patient Focused…” line
   primaryCtaLabel?: string;
 
   trustBar?: string[];
   offerBadge?: string;
 
-  // For PPC-only variants you may want to block indexing
   noindex?: boolean;
 };
 
 export const CAMPAIGNS: Record<string, CampaignOverride> = {
   default: {
     key: "default",
-    heroHeadline: "Physician-Led Hair Transplants Starting at $5,500",
-    heroSubheadline:
-      "Advanced FUE hair restoration with natural results. Schedule a free consultation.",
-    primaryCtaLabel: "Free Consultation",
-    trustBar: ["Physician-Led", "Natural Results", "Discreet Experience"],
+    heroHeadline: "No Counting Grafts - We Focus on Quality",
+    heroHeadlineLine2: "Hair Transplants Starting at $5,500",
+    heroSubheadline: "Patient Focused. Provider Driven.",
+    primaryCtaLabel: "Free Consult",
+    trustBar: [
+      "No Linear Scar with Permanent Results",
+      "No Graft Counting - Focused on Quality",
+      "Minimal Downtime with Minimal Discomfort"
+    ],
     offerBadge: "Limited availability"
   },
 
   // Example PPC variant:
-  google_neograft_tampa: {
-    key: "google_neograft_tampa",
-    heroHeadline: "NeoGraft FUE in Tampa — Natural, Permanent Results",
-    heroSubheadline:
-      "Modern FUE technique with physician-led planning. Book a free consultation today.",
-    primaryCtaLabel: "Book Free Consult",
-    trustBar: ["NeoGraft FUE", "Physician-Led", "Tampa Area"],
+  google_neograft: {
+    key: "google_neograft",
+    heroHeadline: "NeoGraft FUE — Natural, Permanent Results",
+    heroHeadlineLine2: "Schedule a Free Consult",
+    heroSubheadline: "Patient Focused. Provider Driven.",
+    primaryCtaLabel: "Free Consult",
+    trustBar: [
+      "No Linear Scar (FUE)",
+      "Natural Hairline Design",
+      "Physician-Led Oversight"
+    ],
     offerBadge: "PPC Offer",
     noindex: true
   }
