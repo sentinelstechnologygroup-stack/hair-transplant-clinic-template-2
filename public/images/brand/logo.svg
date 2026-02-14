@@ -1,0 +1,5 @@
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="158" height="38" rx="12" stroke="white" opacity="0.35"/>
+  <path d="M22 28V12h4.2c2.2 0 3.9.5 5.1 1.6 1.2 1.1 1.8 2.6 1.8 4.6 0 2-.6 3.6-1.8 4.7-1.2 1.1-2.9 1.6-5.1 1.6H22zm3-2.6h1.2c1.3 0 2.3-.3 3-.9.7-.6 1.1-1.5 1.1-2.7 0-1.2-.4-2.1-1.1-2.7-.7-.6-1.7-.9-3-.9H25v7.2z" fill="white" opacity="0.9"/>
+  <text x="52" y="25" fill="white" font-size="12" font-family="Arial" opacity="0.85">Hair Transplant</text>
+</svg>
