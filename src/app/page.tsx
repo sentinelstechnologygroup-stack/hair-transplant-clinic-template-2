@@ -9,6 +9,8 @@ import LogoSlider from "@/components/LogoSlider";
 import { pickCampaign } from "@/content/campaigns";
 import { HOME } from "@/content/pages/home";
 import { PRACTICE } from "@/content/practice.config";
+import { MEDIA } from "@/content/media.manifest";
+import { hasLocalMedia } from "@/content/available-media";
 
 export const dynamic = "force-static";
 
@@ -19,6 +21,11 @@ export default async function HomePage({
 }) {
   const sp = (await searchParams) ?? {};
   const campaign = pickCampaign(sp);
+  const beforeAfter = MEDIA.beforeAfter.filter(hasLocalMedia);
+  const analysisImages = [
+    { src: MEDIA.provider.clinic, alt: "Clinic" },
+    { src: MEDIA.procedures.neograft, alt: "Procedure" }
+  ].filter(({ src }) => hasLocalMedia(src));
 
   return (
     <div className="space-y-10 md:space-y-14">
@@ -90,16 +97,18 @@ export default async function HomePage({
       />
 
       {/* Before / After */}
-      <Section title="Before / After" subtitle="Replace placeholder images in /public/images/before-after/.">
-        <BeforeAfterGrid />
-      </Section>
+      {beforeAfter.length > 0 && (
+        <Section title="Before / After">
+          <BeforeAfterGrid items={beforeAfter} />
+        </Section>
+      )}
 
       {/* Analysis section (key conversion block on Tampa) */}
       <Section
         title={HOME.sections.analysis.title}
         subtitle="High-intent consult framing (holistic analysis + plan + value)."
       >
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className={analysisImages.length ? "grid gap-6 md:grid-cols-2" : undefined}>
           <div>
             <p className="text-white/70">{HOME.sections.analysis.intro}</p>
             <ul className="mt-4 space-y-2 text-white/80">
@@ -132,25 +141,15 @@ export default async function HomePage({
             </div>
           </div>
 
-          {/* Right-side image pair placeholder (Tampa shows stacked images here) */}
-          <div className="grid gap-4">
-            <div className="relative h-56 overflow-hidden rounded-2xl bg-white/[0.03] ring-1 ring-white/10 md:h-64">
-              <Image
-                src="/images/provider/clinic.jpg"
-                alt="Clinic"
-                fill
-                className="object-cover"
-              />
+          {analysisImages.length > 0 && (
+            <div className="grid gap-4">
+              {analysisImages.map(({ src, alt }) => (
+                <div key={src} className="relative h-56 overflow-hidden rounded-2xl bg-white/[0.03] ring-1 ring-white/10 md:h-64">
+                  <Image src={src} alt={alt} fill className="object-cover" />
+                </div>
+              ))}
             </div>
-            <div className="relative h-56 overflow-hidden rounded-2xl bg-white/[0.03] ring-1 ring-white/10 md:h-64">
-              <Image
-                src="/images/procedures/neograft.jpg"
-                alt="Procedure"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
+          )}
         </div>
       </Section>
 
