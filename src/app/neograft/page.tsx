@@ -3,6 +3,7 @@ import Section from "@/components/Section";
 import CTA from "@/components/CTA";
 import { NEOGRAFT } from "@/content/pages/neograft";
 import { MEDIA } from "@/content/media.manifest";
+import { hasLocalMedia } from "@/content/available-media";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -13,10 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default function NeograftPage() {
+  const hasProcedureImage = hasLocalMedia(MEDIA.procedures.neograft);
   return (
     <div className="space-y-10 md:space-y-14">
       <div className="rounded-3xl bg-white/[0.03] ring-1 ring-white/10 overflow-hidden">
-        <div className="grid md:grid-cols-2">
+        <div className={hasProcedureImage ? "grid md:grid-cols-2" : undefined}>
           <div className="p-6 md:p-10">
             <h1 className="text-3xl md:text-4xl font-semibold text-white">{NEOGRAFT.h1}</h1>
             <p className="mt-3 text-white/70">{NEOGRAFT.intro}</p>
@@ -30,7 +32,7 @@ export default function NeograftPage() {
             </div>
           </div>
 
-          <div className="relative min-h-[280px] md:min-h-[420px]">
+          {hasProcedureImage && <div className="relative min-h-[280px] md:min-h-[420px]">
             <Image
               src={MEDIA.procedures.neograft}
               alt="NeoGraft procedure"
@@ -38,7 +40,7 @@ export default function NeograftPage() {
               className="object-cover"
               priority
             />
-          </div>
+          </div>}
         </div>
       </div>
 

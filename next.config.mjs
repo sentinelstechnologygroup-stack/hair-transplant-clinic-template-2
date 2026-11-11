@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    // For a template: allow local images by default
+    unoptimized: true,
     remotePatterns: []
   }
 };

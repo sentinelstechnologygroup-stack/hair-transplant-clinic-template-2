@@ -4,6 +4,7 @@ import CTA from "@/components/CTA";
 import { PRACTICE } from "@/content/practice.config";
 import { PROVIDER } from "@/content/pages/provider";
 import { MEDIA } from "@/content/media.manifest";
+import { hasLocalMedia } from "@/content/available-media";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -14,10 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default function ProviderPage() {
+  const hasProviderImage = hasLocalMedia(MEDIA.provider.portrait);
   return (
     <div className="space-y-10 md:space-y-14">
       <div className="rounded-3xl bg-white/[0.03] ring-1 ring-white/10 overflow-hidden">
-        <div className="grid md:grid-cols-2">
+        <div className={hasProviderImage ? "grid md:grid-cols-2" : undefined}>
           <div className="p-6 md:p-10">
             <div className="text-sm text-white/60">{PRACTICE.providerTitleLine}</div>
             <h1 className="mt-2 text-3xl md:text-4xl font-semibold text-white">
@@ -34,7 +36,7 @@ export default function ProviderPage() {
             </div>
           </div>
 
-          <div className="relative min-h-[280px] md:min-h-[420px]">
+          {hasProviderImage && <div className="relative min-h-[280px] md:min-h-[420px]">
             <Image
               src={MEDIA.provider.portrait}
               alt="Provider portrait"
@@ -42,7 +44,7 @@ export default function ProviderPage() {
               className="object-cover"
               priority
             />
-          </div>
+          </div>}
         </div>
       </div>
 
